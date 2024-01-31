@@ -68,8 +68,27 @@ class Solution:
                 j -= 1
         
         return ans
-
-
+    
+    def plus_one(self, A):
+        n = len(A)
+        carry = 1
+        for i in range(n-1, -1, -1):
+            if(A[i]+carry>9):
+                A[i] = 0
+                carry = 1
+            else:
+                A[i] += carry
+                carry = 0
+                break
+        
+        if(carry):
+            A.insert(0, 1)
+        
+        while(A[0]==0):
+            A.pop(0)
+        
+        return A
+    
 sol = Solution()
     
 # A = [-2, 1, -3, 4, -1, 2, 1, -5, 4] 
@@ -84,9 +103,16 @@ sol = Solution()
 # res = sol.beggar_sum(A, B)
 # print(res)
 
-A = [0, 1, 0, 2]
-res = sol.rain_water_trapped(A)
+# A = [0, 1, 0, 2]
+# res = sol.rain_water_trapped(A)
+# print(res)
+# A = [1, 2]
+# res = sol.rain_water_trapped(A)
+# print(res)
+
+A = [0, 0, 0, 1, 2, 3]
+res = sol.plus_one(A)
 print(res)
-A = [1, 2]
-res = sol.rain_water_trapped(A)
+A = [9, 9, 9, 9]
+res = sol.plus_one(A)
 print(res)
