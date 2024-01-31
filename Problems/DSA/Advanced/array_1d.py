@@ -50,11 +50,24 @@ class Solution:
     '''Given a vector A of non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.'''
     def rain_water_trapped(self, A):
         n = len(A)
-        left = 0
-        right = n-1
+        ans = 0
+        lmax = 0
+        rmax = 0
+        i = 0
+        j = n-1
+
+        while(i<j):
+            lmax = max(lmax, A[i])
+            rmax = max(rmax, A[j])
+
+            if(lmax<rmax):
+                ans += lmax - A[i]
+                i += 1
+            else:
+                ans += rmax - A[j]
+                j -= 1
         
-
-
+        return ans
 
 
 sol = Solution()
@@ -66,7 +79,14 @@ sol = Solution()
 # res = sol.maxSubArray(A)
 # print(res)
 
-A = 10
-B = [[1,3,10],[6,9,2],[3,5,3],[2,8,4],[6,7,5]]
-res = sol.beggar_sum(A, B)
+# A = 10
+# B = [[1,3,10],[6,9,2],[3,5,3],[2,8,4],[6,7,5]]
+# res = sol.beggar_sum(A, B)
+# print(res)
+
+A = [0, 1, 0, 2]
+res = sol.rain_water_trapped(A)
+print(res)
+A = [1, 2]
+res = sol.rain_water_trapped(A)
 print(res)
