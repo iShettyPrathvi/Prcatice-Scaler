@@ -104,7 +104,7 @@ class Solution:
         '''
 
         n = len(A)
-
+        # A = list(A)
         c_sum=0
         max_sum=0
         l=0
@@ -129,10 +129,10 @@ class Solution:
             else:
                 r += 1
 
-            if max_sum ==0:
-                return []
-            else:
-                return ans_ar
+        if max_sum ==0:
+            return []
+        else:
+            return ans_ar
 
 
 
@@ -168,5 +168,8 @@ A = "010"
 res = sol.max_ones(A)
 print(res)
 A = "111"
+res = sol.max_ones(A)
+print(res)
+A = "1101"
 res = sol.max_ones(A)
 print(res)
