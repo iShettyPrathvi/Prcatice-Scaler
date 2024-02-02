@@ -89,6 +89,53 @@ class Solution:
         
         return A
     
+    '''You are given a binary string A(i.e., with characters 0 and 1) consisting of characters A1, A2, ..., AN. In a single operation, you can choose two indices, L and R, 
+    such that 1 ≤ L ≤ R ≤ N and flip the characters AL, AL+1, ..., AR. By flipping, we mean changing character 0 to 1 and vice-versa.
+    Your aim is to perform ATMOST one operation such that in the final string number of 1s is maximized.
+    If you don't want to perform the operation, return an empty array. Else, return an array consisting of two elements denoting L and R. 
+    If there are multiple solutions, return the lexicographically smallest pair of L and R.
+    NOTE: Pair (a, b) is lexicographically smaller than pair (c, d) if a < c or, if a == c and b < d.'''
+    def max_ones(self, A):
+        '''
+        Using kadane Alogorithm logic
+        when ch[i] is '0' and we flip itll become 1 (so effctively adds +1)
+        when ch[i] is '1' and we flip itll become 0 (so effctively adds -1)
+        so we can find the max sum subarray
+        '''
+
+        n = len(A)
+
+        c_sum=0
+        max_sum=0
+        l=0
+        r=0
+        ans_ar = [-1]*2
+
+        for i in range(n):
+            if(A[i] == "0"):
+                c_sum +=1
+            else:
+                c_sum -= 1
+
+            if c_sum > max_sum:
+                max_sum = c_sum
+                ans_ar[0] = l+1
+                ans_ar[1] = r+1
+            
+            if c_sum < 0:
+                c_sum = 0
+                l = i + 1
+                r = i + 1
+            else:
+                r += 1
+
+            if max_sum ==0:
+                return []
+            else:
+                return ans_ar
+
+
+
 sol = Solution()
     
 # A = [-2, 1, -3, 4, -1, 2, 1, -5, 4] 
@@ -110,9 +157,16 @@ sol = Solution()
 # res = sol.rain_water_trapped(A)
 # print(res)
 
-A = [0, 0, 0, 1, 2, 3]
-res = sol.plus_one(A)
+# A = [0, 0, 0, 1, 2, 3]
+# res = sol.plus_one(A)
+# print(res)
+# A = [9, 9, 9, 9]
+# res = sol.plus_one(A)
+# print(res)
+
+A = "010"
+res = sol.max_ones(A)
 print(res)
-A = [9, 9, 9, 9]
-res = sol.plus_one(A)
+A = "111"
+res = sol.max_ones(A)
 print(res)
